@@ -35,7 +35,7 @@ router.post("/login", (req, res) => {
   if (isValid) {
     Users.getBy({ username: creds.username })
       .then(([user]) => {
-        if (user && bcryptjs.compareSync(creds.password, user.password)) {
+        if (user && bcrypt.compareSync(creds.password, user.password)) {
           const token = makeJwt(user);
           res.status(200).json({ token });
         } else {
