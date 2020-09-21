@@ -13,10 +13,10 @@ module.exports = {
     seeds: {
       directory: "./data/seeds", /// here creating a folder named seed
     },
-    pool: {
-      afterCreate: (conn, done) => {
-        conn.run('PRAGMA foreign_keys = ON', done);
-      },
+    // pool: {
+    //   afterCreate: (conn, done) => {
+    //     conn.run('PRAGMA foreign_keys = ON', done);
+    //   }
   },
 
   staging: {
@@ -48,6 +48,17 @@ module.exports = {
     },
     migrations: {
       tableName: "knex_migrations",
+    },
+  },
+
+  production: {
+    client: "pg",
+    connection: process.env.DATABASE_URL,
+    migrations: {
+      directory: "./data/migrations", // creating a directory with named migrations
+    },
+    seeds: {
+      directory: "./data/seeds", /// here creating a folder named seed
     },
   },
 };
