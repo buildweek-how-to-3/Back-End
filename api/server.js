@@ -7,8 +7,11 @@ const postsRouter = require("../posts/postsRouter");
 
 const server = express();
 
+const cors = require("cors");
+
 server.use(express.json());
 server.use(helmet());
+server.use(cors());
 
 server.use("/api", usersRouter);
 
