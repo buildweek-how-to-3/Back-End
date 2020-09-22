@@ -38,8 +38,13 @@ function update(changes, id) {
 }
 function remove(id) {
   return db("posts")
-    .del({ id })
+    .where({ id })
+    .del()
+
     .then((response) => {
       return findAll();
+    })
+    .catch((err) => {
+      return err;
     });
 }

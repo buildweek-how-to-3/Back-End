@@ -3,18 +3,18 @@ const router = require("express").Router();
 const Posts = require("./postsModel");
 const restricted = require("../auth/restrictedMiddleware");
 
-router.get("/allposts", restricted, (req, res) => {
+router.get("/", restricted, (req, res) => {
   Posts.findAll()
-    .then((users) => {
-      res.status(200).json(users);
+    .then((posts) => {
+      res.status(200).json(posts);
     })
     .catch((error) => {
       res.status(500).json({ message: "No posts available" });
     });
 });
 
-router.get("/", restricted, (req, res) => {
-  const { id } = req.params;
+router.get("/:id", restricted, (req, res) => {
+  const id = req.params;
   Posts.findByUserId(id)
 
     .then((response) => {
@@ -25,9 +25,9 @@ router.get("/", restricted, (req, res) => {
     });
 });
 
-router.post("/", restricted, (req, res) => {
-  const { name, category, description, user_id } = req.body;
-  const userId = req.jwt.subject;
+router.post("/users/:id", restricted, (req, res) => {
+  const { name, category, description } = req.body;
+  const userId = req.params.id;
   Posts.create({ name, category, description, user_id: userId })
     .then((response) => {
       res.status(200).json(response);
@@ -40,7 +40,7 @@ router.post("/", restricted, (req, res) => {
 
 router.put("/:id", restricted, (req, res) => {
   const changes = req.body;
-  const { id } = req.params;
+  const id = req.params.id;
 
   Posts.update(changes, id)
     .then((response) => {
@@ -52,7 +52,7 @@ router.put("/:id", restricted, (req, res) => {
 });
 
 router.delete("/:id", restricted, (req, res) => {
-  const { id } = req.body;
+  const id = req.params.id;
 
   Posts.remove(id)
     .then((response) => {
