@@ -1,13 +1,12 @@
 const express = require("express");
 const helmet = require("helmet");
+const cors = require("cors");
 
 const usersRouter = require("../users/usersRouter");
 const authRouter = require("../auth/authRouter");
 const postsRouter = require("../posts/postsRouter");
 
 const server = express();
-
-const cors = require("cors");
 
 server.use(express.json());
 server.use(helmet());

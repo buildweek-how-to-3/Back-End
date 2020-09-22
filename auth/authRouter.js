@@ -1,7 +1,6 @@
 const router = require("express").Router();
 
 const bcrypt = require("bcryptjs");
-
 const jwt = require("jsonwebtoken");
 
 const Users = require("../auth/authModel");
@@ -49,7 +48,7 @@ router.post("/login", (req, res) => {
     res.status(400).json({ message: "invalid info" });
   }
 });
-
+// middlware
 function validateUser(user) {
   return user.username && user.password ? true : false;
 }

@@ -15,6 +15,6 @@ module.exports = (req, res, next) => {
       }
     });
   } else {
-    res.status(401).json({ message: "You Don't have the right Token" });
+    res.status(401).json({ message: "You Don't have the right" });
   }
 };
