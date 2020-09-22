@@ -13,6 +13,7 @@ server.use("/api", usersRouter);
 
 server.use("/api/auth", authRouter);
 
-
-
+server.get("/", (req, res) => {
+  res.status(200).json({ API: "Running....." });
+});
 module.exports = server;
