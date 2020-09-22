@@ -3,6 +3,7 @@ const helmet = require("helmet");
 
 const usersRouter = require("../users/usersRouter");
 const authRouter = require("../auth/authRouter");
+const postsRouter = require("../posts/postsRouter");
 
 const server = express();
 
@@ -12,6 +13,7 @@ server.use(helmet());
 server.use("/api", usersRouter);
 
 server.use("/api/auth", authRouter);
+server.use("/api/posts", postsRouter);
 
 server.get("/", (req, res) => {
   res.status(200).json({ API: "Running....." });

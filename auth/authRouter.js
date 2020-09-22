@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 
 const jwt = require("jsonwebtoken");
 
-const Users = require("../users/usersModel");
+const Users = require("../auth/authModel");
 
 router.post("/register", (req, res) => {
   const user = req.body;
@@ -13,7 +13,7 @@ router.post("/register", (req, res) => {
   if (isValid) {
     const hash = bcrypt.hashSync(user.password, 8);
     user.password = hash;
-    Users.add(user)
+    Users.create(user)
       .then((newUser) => {
         const token = makeJwt(newUser);
         res.status(201).json({ data: newUser, token });
@@ -33,7 +33,7 @@ router.post("/login", (req, res) => {
   const isValid = validateCredentials(creds);
 
   if (isValid) {
-    Users.getBy({ username: creds.username })
+    Users.find({ username: creds.username })
       .then(([user]) => {
         if (user && bcrypt.compareSync(creds.password, user.password)) {
           const token = makeJwt(user);
