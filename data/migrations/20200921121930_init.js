@@ -7,12 +7,12 @@ exports.up = function (knex) {
     })
 
     .createTable("posts", (tbl) => {
-      tbl.increments("id");
+      tbl.increments("id");//automatically increasing by db
       tbl.string("name", 128).notNullable();
       tbl.string("category", 128).notNullable();
       tbl.string("description", 255).notNullable();
       tbl
-        .integer("user_id")
+        .integer("user_id") // foreign key
         .unsigned()
         .notNullable()
         .references("id")

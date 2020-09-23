@@ -14,14 +14,25 @@ router.get("/", restricted, (req, res) => {
 });
 
 router.get("/:id", restricted, (req, res) => {
-  const id = req.params;
-  Posts.findByUserId(id)
+  const id = req.params.id;
+  Posts.findById(id)
 
     .then((response) => {
       res.status(200).json(response);
     })
     .catch((error) => {
       res.status(500).json({ message: "Error connecting to database.", error });
+    });
+});
+
+router.get("/users/:id", restricted, (req, res) => {
+  const id = req.params.id;
+  Posts.findByUserId(id)
+    .then((response) => {
+      res.status(200).json(response);
+    })
+    .catch((error) => {
+      res.status(500).json({ message: "error ", error });
     });
 });
 

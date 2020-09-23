@@ -4,6 +4,7 @@ module.exports = {
   get,
   add,
   getBy,
+  remove,
 };
 
 function get() {
@@ -13,6 +14,19 @@ function get() {
 function add(user) {
   return db("users").insert(user);
 }
-function getBy(filter) {
-  return db("users").where(filter).orderBy("id");
+function getBy(id) {
+  return db("users").where({ id }).first();
+}
+
+function remove(id) {
+  return db("users")
+    .where({ id })
+    .del()
+
+    .then((response) => {
+      return findAll();
+    })
+    .catch((err) => {
+      return err;
+    });
 }
