@@ -11,7 +11,6 @@ Base URL for deployed API: https://backend-how-to.herokuapp.com/
 | Method | URL                  | Description            | Requires Token |
 | ------ | -------------------- | ---------------------- | -------------- |
 | POST   | /api/auth/register   | register a new user    | -              |
-| POST   | /register            | register a new user    | -              |
 | POST   | /api/auth/login      | login as existing user | -              |
 | POST   | /api/posts           | create a new posts     | X              |
 | GET    | /api/posts           | gets all posts         | X              |
