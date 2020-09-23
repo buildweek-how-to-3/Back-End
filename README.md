@@ -16,13 +16,11 @@ Base URL for deployed API: https://backend-how-to.herokuapp.com/
 | POST   | /api/posts           | create a new posts     | X              |
 | GET    | /api/posts           | gets all posts         | X              |
 | GET    | /api/posts/users/:id | gets a specific posts  | X              |
-
-| GET | /api/users/ | gets all users | X |
-| GET | /users/:id | gets specific user | X |
-
-| PUT | /api/posts/:id | edit a posts | X |
-| DELETE | /posts/:id | delete a posts | X |
-| DELETE | /users/:id | delete a user | X |
+| GET    | /api/users/          | gets all users         | X              |
+| GET    | /users/:id           | gets specific user     | X              |
+| PUT    | /api/posts/:id       | edit a posts           | X              |
+| DELETE | /posts/:id           | delete a posts         | X              |
+| DELETE | /users/:id           | delete a user          | X              |
 
 ## **Table Requirements**
 
