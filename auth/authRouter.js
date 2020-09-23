@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const Users = require("../auth/authModel");
 
 router.post("/register", (req, res) => {
+  // new users able to register before signing in
   const user = req.body;
   const isValid = validateUser(user);
 
@@ -28,6 +29,7 @@ router.post("/register", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
+  // users is able to login after register here.
   const creds = req.body;
   const isValid = validateCredentials(creds);
 
@@ -35,10 +37,14 @@ router.post("/login", (req, res) => {
     Users.find({ username: creds.username })
       .then(([user]) => {
         if (user && bcrypt.compareSync(creds.password, user.password)) {
+          // comparing the token to see if its a match and can login
           const token = makeJwt(user);
-          res.status(200).json({ token });
+          res.status(200).json({ message: "Login Successful", token });
         } else {
-          res.status(401).json({ message: "you cannot pass" });
+          res.status(401).json({
+            message:
+              "You don't have right credentials. Please check and try again!!",
+          });
         }
       })
       .catch((error) => {
@@ -48,8 +54,10 @@ router.post("/login", (req, res) => {
     res.status(400).json({ message: "invalid info" });
   }
 });
+
 // middlware
 function validateUser(user) {
+  // validating username and password here.
   return user.username && user.password ? true : false;
 }
 function validateCredentials(creds) {
@@ -57,12 +65,13 @@ function validateCredentials(creds) {
 }
 
 function makeJwt({ id, username }) {
+  //
   const payload = {
     username,
     subject: id,
   };
   const config = {
-    jwtSecret: "Tero Tauko",
+    jwtSecret: process.env.JWT_SECRET || "Tero Tauko",
   };
   const options = {
     expiresIn: "1d",
