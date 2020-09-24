@@ -36,7 +36,7 @@ router.get("/users/:id", restricted, (req, res) => {
     });
 });
 
-router.post("/users/:id",  (req, res) => {
+router.post("/users/:id", (req, res) => {
   const { name, category, description } = req.body;
   const userId = req.params.id;
   Posts.create({ name, category, description, user_id: userId })
