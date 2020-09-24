@@ -12,9 +12,9 @@ Base URL for deployed API: https://backend-how-to.herokuapp.com/
 | ------ | -------------------- | --------------------------------------- | -------------- |
 | POST   | /api/auth/register   | register a new user                     | -              |
 | POST   | /api/auth/login      | login as existing user                  | -              |
+| POST   | /api/posts/users/:id | create a new posts by by specific users | X              |
 | GET    | /api/posts           | gets all posts                          | X              |
 | GET    | /api/posts/:id       | gets a specific posts by id             | X              |
-| POST   | /api/posts/users/:id | create a new posts by by specific users | X              |
 | GET    | /api/posts/users/:id | gets a specific posts by users          | X              |
 | GET    | /api/users           | gets all users                          | X              |
 | GET    | /api/users/:id       | gets specific user                      | X              |
