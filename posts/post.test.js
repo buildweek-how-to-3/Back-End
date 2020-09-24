@@ -3,6 +3,9 @@ const server = require("../api/server");
 const db = require("../data/dbConfig");
 
 describe("authRouter", () => {
+  beforeEach(async () => {
+    await db("posts").truncate();
+  });
   describe("POST /api/auth/register", () => {
     it("should return http status code 201 when users register", async () => {
       await supertest(server)
