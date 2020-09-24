@@ -12,21 +12,23 @@ describe("users", () => {
 });
 
 describe("POST /login", () => {
-  it("sends 400 status if login creds are unregistered", () => {
+  it("should return http status code 200 if login creds are registered", () => {
     request(server)
-      .post("api/auth/login")
+      .post("/api/auth/login")
+      .send({ username: "test1", password: "test123" })
       .then((res) => {
-        expect(res.status).toBe(400);
+        expect(res.status).toBe(200);
       });
   });
 });
 
 describe("POST /register", () => {
-  it("it responds with 400 status code if bad username and password", () => {
+  it("it responds with 201 when users registers", () => {
     request(server)
-      .post("api/auth/register")
+      .post("/api/auth/register")
+      .send({ username: "test1", password: "test123" })
       .then((res) => {
-        expect(res.status).toBe(400);
+        expect(res.status).toBe(201);
       });
   });
 });

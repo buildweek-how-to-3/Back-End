@@ -14,5 +14,17 @@ describe("the server", () => {
           expect(res.status).toBe(200);
         });
     });
+
+    it("should return JSON object", () => {
+      const expectedBody = { API: "Running....." };
+      let response;
+
+      return request(server)
+        .get("/")
+        .then((res) => {
+          response = res;
+          expect(response.body).toEqual(expectedBody);
+        });
+    });
   });
 });
